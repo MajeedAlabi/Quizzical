@@ -1,27 +1,29 @@
 import React from "react";
 import { decode } from "html-entities";
 
-export default function Question(props) {
-    const buttonAnswers = props.answers.map((answer, index) => {
-        return (
-            <button className={`answerButton
-                ${answer === props.pickedAnswer ? "selected" : ""}
-                ${props.showResult && answer === props.correctAnswer ? "correct" : ''}
-                ${props.showResult && answer === props.pickedAnswer && answer !== props.correctAnswer ? "incorrect" : ''}
-                ${props.showResult && answer !== props.correctAnswer ? 'dimmed' : ''}
-            `}
+export default function Question({question,options,clickOption,selectedOption,showResult,correctOption}){
+    const eachOption = options.map((optionBtn,index) => {
+        return(
+            <button
+                className={`optionBtn 
+                ${optionBtn === selectedOption ? "selected" : ""}
+                ${showResult && optionBtn === correctOption ? "correct" : ""}
+                ${showResult && optionBtn === selectedOption && optionBtn !== correctOption ? "incorrect" : ""}
+                ${showResult && optionBtn !== correctOption ? "dimmed" : ""}
+            `} 
                 key={index}
-                onClick={()=> props.newAnswer(props.question,answer)}
-                disabled = {props.showResult}
+                onClick={() => clickOption(question, optionBtn)}
+                disabled={showResult}
             >
-                {decode(answer)}
+                {decode(optionBtn)}
             </button>
         )
     })
-    return (
-        <div className="questionElement">
-            <div className="questionQuestions">{decode(props.question)}</div>
-            <div className="questionButton">{buttonAnswers}</div>
+    
+    return(
+        <div className="questions">
+            <h1>{decode(question)}</h1>
+            <div className="eachOption">{eachOption}</div>
         </div>
     )
 }

@@ -1,23 +1,27 @@
-import React, { useState } from "react"
-import Home from "./components/Home"
-import Quiz from "./components/Quiz"
+import React from "react";
+import { useState } from "react";
 
-function App() {
+import YelloBlob from "./assets/blob-yellow.png"
+import BlueBlob from "./assets/blob-blue.png"
 
-  const [startGame, setStartGame] = useState(false)
-  const [category, setCategory] = useState('')
-  const [difficulty, setDifficulty] = useState('')
-  function beginGame() {
-    setStartGame(prev => !prev)
+import Homepage from "./components/Homepage";
+import Quiz from "./components/Quiz";
+
+
+export default function App() {
+  const [quiz, setQuiz] = useState(false)
+  const [category, setCategory] = useState("")
+  const [difficulty, setDifficulty] = useState("")
+
+  function startQuiz() {
+    setQuiz((prevState) => !prevState)
   }
+
   return (
     <>
-      {!startGame ? <Home beginGame={beginGame}
-        setCategory={setCategory}
-        setDifficulty={setDifficulty}
-      /> : <Quiz beginGame={beginGame} category={category} difficulty={difficulty} />}
+      <img src={YelloBlob} className="blob-yellow" />
+      <img src={BlueBlob} className="blob-blue" />
+      {quiz ? <Quiz play={startQuiz} category={category} difficulty={difficulty}/>: <Homepage start={startQuiz} setCategory={setCategory} setDifficulty={setDifficulty}/>}
     </>
   )
 }
-
-export default App
