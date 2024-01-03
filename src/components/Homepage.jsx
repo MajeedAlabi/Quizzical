@@ -8,7 +8,7 @@ export default function Homepage({ start, setCategory, setDifficulty }) {
             <select onChange={(event) => setCategory(event.target.value)}>
                 <option value="">Select a category</option>
                 <option value="31">Anime/Manga</option>
-                <option value="12">Music</option>
+                <option value="20">Mythology</option>
                 <option value="22">Geography</option>
                 <option value="21">Sports</option>
                 <option value="27">Animals</option>
